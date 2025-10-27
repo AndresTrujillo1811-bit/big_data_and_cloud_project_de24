@@ -4,13 +4,23 @@ import dagster as dg
 from dagster_dlt import DagsterDltResource, dlt_assets
 from dagster_dbt import DbtCliResource, DbtProject, dbt_assets
 import os 
-import sys # to import dlt script
+import sys                # to import dlt script
 sys.path.insert(0, "../dlt_code")
 from load_job_ads import jobads_source
 
 # Path
 DUCKDB_PATH = os.getenv("DUCKDB_PATH")
 DBT_PROFILES_DIR = os.getenv("DBT_PROFILES_DIR")
+# Fallback defaults if env vars are missing
+if not DUCKDB_PATH:
+    DUCKDB_PATH = str(Path(__file__).parents[1] / "duckdb_warehouse" / "job_ads.duckdb")
+
+if not DBT_PROFILES_DIR:
+    DBT_PROFILES_DIR = str(Path.home() / ".dbt")
+
+# Debug log
+print(f"Using DUCKDB_PATH = {DUCKDB_PATH}")
+print(f"Using DBT_PROFILES_DIR = {DBT_PROFILES_DIR}")
 #duckdb_path = Path(__file__).parents[1] / "duckdb_warehouse" / "job_ads_duckdb"
 
 # dlt Asset 
@@ -58,4 +68,9 @@ def dlt_load_sensor():
     
     
 # Definitions 
-defs = dg.Definitions(assets=[dlt_load, dbt_models], resources={"dlt": dlt_resource, "dbt": dbt_resource}, jobs=[job_dlt, job_dbt], schedules=[schedule_dlt], sensors=[dlt_load_sensor],)  
+defs = dg.Definitions(
+    assets=[dlt_load, dbt_models],
+    resources={"dlt": dlt_resource, "dbt": dbt_resource},
+    jobs=[job_dlt, job_dbt],
+    schedules=[schedule_dlt], 
+    sensors=[dlt_load_sensor],)  
