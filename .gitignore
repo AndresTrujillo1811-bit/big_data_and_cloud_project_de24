@@ -210,3 +210,6 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 .duckdb
+orchestration/.tmp_dagster_home_13bdyio1/history/runs.db
+orchestration/.tmp_dagster_home_13bdyio1/history/runs/index.db
+orchestration/.tmp_dagster_home_13bdyio1/schedules/schedules.db
