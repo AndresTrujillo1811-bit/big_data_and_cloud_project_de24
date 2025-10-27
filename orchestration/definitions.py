@@ -29,7 +29,7 @@ def dlt_load(context: dg.AssetExecutionContext, dlt: DagsterDltResource):
     
 
 # dbt Asset
-#profiles_dir = Path.home() / ".dbt" 
+profiles_dir = Path.home() / ".dbt" 
 dbt_project_directory = Path(__file__).parents[1] / "dbt_code"
 dbt_project = DbtProject(project_dir=dbt_project_directory, profiles_dir=Path(DBT_PROFILES_DIR))
 dbt_resource = DbtCliResource(project_dir=dbt_project)
