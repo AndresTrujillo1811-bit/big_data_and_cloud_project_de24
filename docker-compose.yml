@@ -1,5 +1,5 @@
 services:
-  dwh_pipeline:
+  dwh_project:
     build:
       context: .
       dockerfile: dockerfile.dwh
