@@ -1,7 +1,3 @@
-
-
-
-
 from pathlib import Path
 import streamlit as st
 from components.top_employers import show_top_employers

@@ -1,6 +1,6 @@
 # duckdb
 *.duckdb
-duckdb_warehouse/
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

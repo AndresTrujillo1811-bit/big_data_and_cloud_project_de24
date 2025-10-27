@@ -9,7 +9,9 @@ sys.path.insert(0, "../dlt_code")
 from load_job_ads import jobads_source
 
 # Path
-duckdb_path = Path(__file__).parents[1] / "duckdb_warehouse" / "job_ads_duckdb"
+DUCKDB_PATH = os.getenv("DUCKDB_PATH")
+DBT_PROFILES_DIR = os.getenv("DBT_PROFILES_DIR")
+#duckdb_path = Path(__file__).parents[1] / "duckdb_warehouse" / "job_ads_duckdb"
 
 # dlt Asset 
 dlt_resource = DagsterDltResource() 
@@ -18,7 +20,7 @@ dlt_resource = DagsterDltResource()
     dlt_pipeline = dlt.pipeline(
         pipeline_name="jobsearch",
         dataset_name="staging",
-        destination=dlt.destinations.duckdb(duckdb_path),
+        destination=dlt.destinations.duckdb(DUCKDB_PATH),
     ),
 )
 def dlt_load(context: dg.AssetExecutionContext, dlt: DagsterDltResource): 
@@ -27,9 +29,9 @@ def dlt_load(context: dg.AssetExecutionContext, dlt: DagsterDltResource):
     
 
 # dbt Asset
-profiles_dir = Path.home() / ".dbt" 
+#profiles_dir = Path.home() / ".dbt" 
 dbt_project_directory = Path(__file__).parents[1] / "dbt_code"
-dbt_project = DbtProject(project_dir=dbt_project_directory, profiles_dir=profiles_dir)
+dbt_project = DbtProject(project_dir=dbt_project_directory, profiles_dir=Path(DBT_PROFILES_DIR))
 dbt_resource = DbtCliResource(project_dir=dbt_project)
 dbt_project.prepare_if_dev()
 
