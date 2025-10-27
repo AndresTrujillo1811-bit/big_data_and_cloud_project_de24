@@ -25,14 +25,14 @@ local_css(Path(__file__).parent / "styles.css")
 chooser = [
     "Alla områden",
     "Data/IT",
-    "Hotel, restaurang & Storhushall",
+    "Hotel, restaurang, storhushåll",
     "Kultur, media, design"
 ]
 
 mart_schema = {
     "Alla områden": "main_marts.mart_main",
     "Data/IT": "main_marts.mart_data_it",
-    "Hotel, restaurang & Storhushall": "main_marts.mart_hotell_restaurang",
+    "Hotel, restaurang, storhushåll": "main_marts.mart_hotell_restaurang",
     "Kultur, media, design": "main_marts.mart_kultur_media_design",
 }
 
