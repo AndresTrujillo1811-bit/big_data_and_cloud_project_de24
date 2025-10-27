@@ -69,6 +69,6 @@ if __name__ == "__main__":
     table_name = "job_ads"
     query = ""
 
-    # "Data/IT", "Kultur, media & design", "Hotell, restaurang & storhushåll"
+    # "Data/IT", "Kultur, media & design", "Hotell,restaurang,storhushåll"
     occupation_fields = ("apaJ_2ja_LuF", "9puE_nYg_crq", "ScKy_FHB_7wT")
     run_pipeline(query, table_name, occupation_fields)

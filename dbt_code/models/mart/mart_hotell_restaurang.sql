@@ -34,4 +34,6 @@ left join dim_employer de ON de.employer_id = ft.employer_id
 left join dim_auxilliary da ON da.auxilliary_attribute_id = ft.auxilliary_attribute_id
 left join dim_job_details dj ON dj.job_details_id = ft.job_details_id
 left join dim_occupation d_occ ON d_occ.occupation_id = ft.occupation_id
-where d_occ.occupation_field = 'hotell, restaurang & storkök'
+WHERE LOWER(d_occ.occupation_field) LIKE '%hotell%'
+   OR LOWER(d_occ.occupation_field) LIKE '%restaurang%'
+   OR LOWER(d_occ.occupation_field) LIKE '%storhushåll%'
