@@ -114,3 +114,4 @@ def create_map(table="mart_main", occupation=None):
     )
 
     return fig
+

@@ -1,8 +1,3 @@
-# ==============================================
-# dashboard_main.py
-# Streamlit dashboard for JobTech analysis
-# ==============================================
-
 from pathlib import Path
 import streamlit as st
 from components.top_employers import show_top_employers
@@ -10,6 +5,7 @@ from components.top_occupations import occupation_chart
 from components.exp_license import show_pie_chart
 from components.karta import create_map
 from conn_warehouse import get_job_list
+
 
 # ---------- Local CSS Loader ----------
 def local_css(file_name):
@@ -21,6 +17,7 @@ def local_css(file_name):
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
     else:
         st.warning(f"⚠️ CSS file not found: {file_path}")
+
 
 # ---------- Page Setup ----------
 local_css(Path(__file__).parent / "styles.css")
@@ -38,6 +35,7 @@ mart_schema = {
     "Hotel, restaurang, storhushåll": "main_marts.mart_hotell_restaurang",
     "Kultur, media, design": "main_marts.mart_kultur_media_design",
 }
+
 
 # ---------- Main Dashboard Function ----------
 def dashboard_page():
@@ -69,48 +67,26 @@ def dashboard_page():
 
     df.columns = [c.upper() for c in df.columns]  # normalize case
 
-    # ---- Normalize to 1-row-per-ad for KPIs ----
-    ID_CANDIDATES = ["JOB_AD_ID", "AD_ID", "ID", "JOB_ID"]
-    id_col = next((c for c in ID_CANDIDATES if c in df.columns), None)
-
-    bool_cols = [c for c in ["EXPERIENCE_REQUIRED", "DRIVING_LICENSE_REQUIRED"] if c in df.columns]
-    date_cols = [c for c in ["PUBLICATION_DATE"] if c in df.columns]
-
-    if id_col:
-        agg_dict = {}
-        for c in bool_cols:
-            agg_dict[c] = "max"  # any row with True counts as True
-        for c in date_cols:
-            agg_dict[c] = "max"  # latest publication date
-        if agg_dict:
-            kpi_base = df.groupby(id_col, as_index=False).agg(agg_dict)
-        else:
-            kpi_base = df.drop_duplicates(subset=[id_col])
-    else:
-        kpi_base = df.drop_duplicates()
-
-    # ---------- KPI Helper ----------
-    def safe_count_true(base_df, col_name):
-        if col_name not in base_df.columns:
+    # ---------- KPI Section ----------
+    def get_count(df, col_name):
+        if col_name not in df.columns:
             st.warning(f"⚠️ Column '{col_name}' not found in data.")
             return 0
-        return base_df[col_name].astype(str).str.lower().isin(["true", "1", "yes"]).sum()
+        return df[df[col_name].isin([True, 1])].shape[0]
 
-    # ---------- KPIs ----------
-    total_vacancies = len(kpi_base)
+    total_vacancies = len(df)
 
     today_vacancies = 0
-    if "PUBLICATION_DATE" in kpi_base.columns:
-        latest_date = kpi_base["PUBLICATION_DATE"].max()
-        today_vacancies = kpi_base.loc[kpi_base["PUBLICATION_DATE"].eq(latest_date)].shape[0]
+    if "PUBLICATION_DATE" in df.columns:
+        today_vacancies = df[df["PUBLICATION_DATE"] == df["PUBLICATION_DATE"].max()].shape[0]
 
-    exp_required = safe_count_true(kpi_base, "EXPERIENCE_REQUIRED")
-    license_required = safe_count_true(kpi_base, "DRIVING_LICENSE_REQUIRED")
+    exp_required = get_count(df, "EXPERIENCE_REQUIRED")
+    license_required = get_count(df, "DRIVING_LICENSE_REQUIRED")
 
     # Display KPIs
     kpi1, kpi2, kpi3, kpi4 = st.columns(4)
-    kpi1.metric("Total Vacancies (unique ads)", f"{total_vacancies:,}")
-    kpi2.metric("Latest-Day Vacancies", f"{today_vacancies:,}")
+    kpi1.metric("Total Vacancies", f"{total_vacancies:,}")
+    kpi2.metric("Today’s Vacancies", f"{today_vacancies:,}")
     kpi3.metric("With Experience", f"{exp_required:,}")
     kpi4.metric("With License", f"{license_required:,}")
 
