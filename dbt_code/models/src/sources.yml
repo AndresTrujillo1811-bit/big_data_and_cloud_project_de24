@@ -3,7 +3,7 @@ sources:
       schema: staging
       tables:
         - name: stg_ads
-          identifier: job_ads
+          identifier: jobads_resource
           metadata:
             dagster:
               asset_key: ['dlt_jobads_source_jobads_resource']
