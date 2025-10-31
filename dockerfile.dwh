@@ -1,11 +1,5 @@
 FROM python:3.11
 
-
-ENV PYTHONDONTWRITEBYTECODE=1 \ 
-    PYTHONUNBUFFERED=1 \
-    DBT_PROFILES_DIR=/pipeline/ \ 
-    DUCKDB_PATH=/duckdb_warehouse/job_ads.duckdb
-
 WORKDIR /pipeline/orchestration
 
 COPY dlt_code/ /pipeline/dlt_code/

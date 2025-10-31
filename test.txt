@@ -1,0 +1,16 @@
+dashboard:
+    build:
+      context: .
+      dockerfile: dockerfile.dashboard
+    container_name: dashboard
+    depends_on:
+      - dwh_pipeline
+    volumes:
+      #read-only bind mount
+      - ./duckdb_warehouse:/duckdb_warehouse:rw
+    ports:
+      - "8501:8501"
+    environment:
+      - DUCKDB_PATH=/duckdb_warehouse/job_ads.duckdb
+
+mnt/data/job_ads.duckdb 

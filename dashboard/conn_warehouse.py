@@ -1,32 +1,18 @@
 import duckdb
-import os
-from dotenv import load_dotenv
 from pathlib import Path
 
-# Load .env from project root
-load_dotenv(Path(__file__).parents[1] / ".env")
+# Fixed path to DuckDB file
+FILES_SHARE_PATH = Path("/mnt/data/job_ads.duckdb")
 
 def get_duckdb_connection():
-    # Read DUCKDB_PATH from .env or fallback
-    db_path = os.getenv("DUCKDB_PATH")
-
-    if not db_path:
-        db_path = Path(__file__).parents[1] / "duckdb_warehouse" / "job_ads.duckdb"
-
-    # ✅ Convert Path to string (important!)
-    db_path = str(db_path)
-
+    db_path = FILES_SHARE_PATH # Use the fixed path for Azure
     print(f"🔗 Connecting to DuckDB at: {db_path}")
-
-    # ✅ Ensure parent directory exists
-    Path(db_path).parent.mkdir(parents=True, exist_ok=True)
-
-    # ✅ Connect to the database file
-    con = duckdb.connect(database=db_path)
+    db_path.parent.mkdir(parents=True, exist_ok=True)  # Ensure parent directory exists
+    con = duckdb.connect(database=str(db_path)) # Connect to the DuckDB database
     return con
 
 
-def get_job_list(query: str = "SELECT * FROM staging.job_ads"):
+def get_job_list(query: str = "SELECT * FROM staging.jobads_resource"): # Getting job rows 
     con = get_duckdb_connection()
     df = con.execute(query).fetchdf()
     con.close()

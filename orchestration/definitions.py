@@ -11,17 +11,6 @@ from load_job_ads import jobads_source
 # Path
 DUCKDB_PATH = os.getenv("DUCKDB_PATH")
 DBT_PROFILES_DIR = os.getenv("DBT_PROFILES_DIR")
-# Fallback defaults if env vars are missing
-if not DUCKDB_PATH:
-    DUCKDB_PATH = str(Path(__file__).parents[1] / "duckdb_warehouse" / "job_ads.duckdb")
-
-if not DBT_PROFILES_DIR:
-    DBT_PROFILES_DIR = str(Path.home() / ".dbt")
-
-# Debug log
-print(f"Using DUCKDB_PATH = {DUCKDB_PATH}")
-print(f"Using DBT_PROFILES_DIR = {DBT_PROFILES_DIR}")
-#duckdb_path = Path(__file__).parents[1] / "duckdb_warehouse" / "job_ads_duckdb"
 
 # dlt Asset 
 dlt_resource = DagsterDltResource() 
