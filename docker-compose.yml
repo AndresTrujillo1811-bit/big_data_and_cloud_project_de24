@@ -6,28 +6,16 @@ services:
       context: .
       dockerfile: dockerfile.dwh
     container_name: dwh_pipeline
-    volumes:
-      #read-only bind mount
-      - ${HOME}/.dbt/profiles.yml:/pipeline/profiles.yml:ro
-      #blind mount
-      - ./duckdb_warehouse:/duckdb_warehouse
     ports:
       - "3000:3000"
-    environment:
-      - DUCKDB_PATH=/duckdb_warehouse/job_ads.duckdb
-      - DBT_PROFILES_DIR=/pipeline/
+    image: rgdataproject-e6ajgqgmb3d5guhz.azurecr.io/dwh-pipeline:latest  
 
   dashboard:
     build:
       context: .
       dockerfile: dockerfile.dashboard
     container_name: dashboard
-    depends_on:
-      - dwh_pipeline
-    volumes:
-      #read-only bind mount
-      - ./duckdb_warehouse:/duckdb_warehouse:rw
     ports:
       - "8501:8501"
-    environment:
-      - DUCKDB_PATH=/duckdb_warehouse/job_ads.duckdb
+    image: rgdataproject-e6ajgqgmb3d5guhz.azurecr.io/dashboard:latest
+  

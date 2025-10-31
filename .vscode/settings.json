@@ -1,3 +1,6 @@
 {
-    "taipyStudio.gUI.elementsFilePaths": []
+    "taipyStudio.gUI.elementsFilePaths": [],
+    "python.analysis.extraPaths": [
+        "./dlt_code"
+    ]
 }
