@@ -91,7 +91,7 @@ python dlt_code/load_job_ads.py
 
 ## 💰 Cost Estimation & Budget Management
 
- - Step 1: Set up Cost Management
+ ### Step 1: Set up Cost Management
 '''bash
  Create a budget using Azure CLI
 az consumption budget create \
@@ -109,7 +109,7 @@ az consumption budget create \
         \"threshold\": 80,
         \"contactEmails\": [\".......\"]
       }
-  }"
+  }" '''
 
 - This sets a monthly cost limit of 30 USD and notifies the team when spending exceeds 80% of the budget.
 
