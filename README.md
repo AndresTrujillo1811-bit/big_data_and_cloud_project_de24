@@ -34,10 +34,9 @@ Estimate and monitor Azure costs using Azure Cost Management + Billing.
 
 🧾 Azure Cost Management + Billing (monitoring)
 
+### 🧰 Project Structure
 
-###  🧰 Project Structure
-
-bash
+```bash
 big_data_and_cloud_project_de24/
 │
 ├── dlt_code/                  # Data extraction & load logic (JobTech API)
@@ -47,8 +46,9 @@ big_data_and_cloud_project_de24/
 ├── duckdb_warehouse/          # DuckDB local data warehouse
 ├── docker/                    # Dockerfiles for each service
 ├── .env                       # Environment variables (API keys, paths)
-├── requirements.txt            # Python dependencies
+├── requirements.txt           # Python dependencies
 └── README.md                  # Project documentation
+
 
 
 
