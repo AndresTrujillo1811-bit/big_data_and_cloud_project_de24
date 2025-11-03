@@ -37,36 +37,37 @@ Estimate and monitor Azure costs using Azure Cost Management + Billing.
 
 ###  🧰 Project Structure
 
-
-   big_data_and_cloud_project_de24/
-    │
-    ├── dlt_code/                  # Data extraction & load logic (JobTech API)
-    ├── dbt_code/                  # dbt models, seeds, macros
-    ├── dagster_code/              # Orchestration logic
-    ├── dashboard/                 # Streamlit dashboard
-    ├── duckdb_warehouse/          # DuckDB local data warehouse
-    ├── docker/                    # Dockerfiles for each service
-    ├── .env                       # Environment variables (API keys, paths)
-    ├── requirements.txt            # Python dependencies
-    └── README.md                  # Project documentation
+bash
+big_data_and_cloud_project_de24/
+│
+├── dlt_code/                  # Data extraction & load logic (JobTech API)
+├── dbt_code/                  # dbt models, seeds, macros
+├── dagster_code/              # Orchestration logic
+├── dashboard/                 # Streamlit dashboard
+├── duckdb_warehouse/          # DuckDB local data warehouse
+├── docker/                    # Dockerfiles for each service
+├── .env                       # Environment variables (API keys, paths)
+├── requirements.txt            # Python dependencies
+└── README.md                  # Project documentation
 
 
 
 
 ###  🚀 Deployment 
 
- - Step 1: Local Setup
-
-git clone https://github.com/AndresTrujillo1811-bit/big_data_and_cloud_project_de24.git
-cd big_data_and_cloud_project_de24
-python -m venv .venv
+ -  Local Setup
+bash
+  git clone https://github.com/AndresTrujillo1811-bit/big_data_and_cloud_project_de24.git
+    cd big_data_and_cloud_project_de24
+    python -m venv .venv
 source .venv/bin/activate      # or .venv\Scripts\activate (Windows)
 pip install -r requirements.txt
 
 
--  Step 2: Run Locally
- Extract and load job ads
- python dlt_code/load_job_ads.py
+-  Run Locally
+bash
+Extract and load job ads
+python dlt_code/load_job_ads.py
  Transform with dbt
  dbt run
 
@@ -83,7 +84,7 @@ pip install -r requirements.txt
 
 
 
- ### Set up daily refresh (DuckDB update):
+ ## Set up daily refresh (DuckDB update):
 
 - Use Azure Container Instances or Azure Logic Apps to trigger daily dbt run.
 
@@ -91,7 +92,7 @@ pip install -r requirements.txt
 ## 💰 Cost Estimation & Budget Management
 
  - Step 1: Set up Cost Management
-
+'''bash
  Create a budget using Azure CLI
 az consumption budget create \
   --amount 30 \
