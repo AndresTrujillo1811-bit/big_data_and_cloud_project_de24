@@ -1,36 +1,39 @@
-# Big_data_and_cloud_project_de24
+# 🧠 Big Data & Cloud Project – HR Analytics Dashboard
 
-### 🧭 Project Overview
+## 🧭 Project Overview
 
 This project is part of the **Big Data & Cloud** module in the **YH Data Engineering program (STI, Stockholm)**.  
-It demonstrates how to **deploy a data warehouse pipeline to Azure**, automate data ingestion from **JobTech API**, and visualize HR analytics insights through an **interactive Streamlit dashboard**.
+It demonstrates how to **deploy a data warehouse pipeline to Azure**, automate data ingestion from **JobTech API**,  
+and visualize HR analytics insights through an **interactive Streamlit dashboard**.
 
 ---
 
-### 🧩 Objectives
+## 🧩 Objectives
 
 - **Cloud Deployment:**  
-  Deploy an end-to-end data engineering pipeline (DLT → DBT → Dagster → Streamlit) on Azure using DuckDB as the data warehouse.
+  Deploy an end-to-end data engineering pipeline (**DLT → DBT → Dagster → Streamlit**) on **Azure** using **DuckDB** as the data warehouse.
 
 - **Cost Estimation:**  
-  Estimate and monitor Azure costs using **Azure Cost Management + Billing**.
+  Estimate and monitor **Azure costs** using **Azure Cost Management + Billing**.
 
 ---
 
-### 🧰 Tools & Technologies
+## 🧰 Tools & Technologies
 
-🐍 Python 3.11+  
-🦆 DuckDB  
-🧱 DLT (Data Loading Tool)  
-🧮 DBT (Data Build Tool)  
-⚙️ Dagster (Orchestration)  
-🌐 Streamlit (Dashboard)  
-☁️ Microsoft Azure (Deployment)  
-🧾 Azure Cost Management + Billing (Monitoring)
+| Tool | Description |
+|------|--------------|
+| 🐍 **Python 3.11+** | Core programming language |
+| 🦆 **DuckDB** | Analytical database engine |
+| 🧱 **DLT (Data Loading Tool)** | Data extraction & loading |
+| 🧮 **DBT (Data Build Tool)** | Data transformation & modeling |
+| ⚙️ **Dagster** | Pipeline orchestration |
+| 🌐 **Streamlit** | Dashboard visualization |
+| ☁️ **Microsoft Azure** | Cloud deployment platform |
+| 🧾 **Azure Cost Management + Billing** | Cost tracking and budgeting |
 
 ---
 
-### 🧱 Project Structure
+## 🧱 Project Structure
 
 ```bash
 big_data_and_cloud_project_de24/
@@ -44,49 +47,70 @@ big_data_and_cloud_project_de24/
 ├── .env                       # Environment variables (API keys, paths)
 ├── requirements.txt           # Python dependencies
 └── README.md                  # Project documentation
+```
 
+---
 
+## 🚀 Deployment Guide
 
+### 🧩 Local Setup
 
-###  🚀 Deployment 
+```bash
+# Clone the repository
+git clone https://github.com/AndresTrujillo1811-bit/big_data_and_cloud_project_de24.git
 
- -  Local Setup
-bash
-  git clone https://github.com/AndresTrujillo1811-bit/big_data_and_cloud_project_de24.git
-    cd big_data_and_cloud_project_de24
-    python -m venv .venv
-source .venv/bin/activate      # or .venv\Scripts\activate (Windows)
+# Navigate to project folder
+cd big_data_and_cloud_project_de24
+
+# Create a virtual environment
+python -m venv .venv
+
+# Activate environment
+source .venv/bin/activate      # macOS/Linux
+.venv\Scripts\activate       # Windows
+
+# Install dependencies
 pip install -r requirements.txt
+```
 
+---
 
--  Run Locally
- Extract and load job ads
- python dlt_code/load_job_ads.py
- Transform with dbt
- dbt run
+### 🧩 Run Locally
 
-- Launch dashboard
-  streamlit run dashboard/dashboard_main.py
+```bash
+# Extract and load job ads
+python dlt_code/load_job_ads.py
 
+# Transform with dbt
+dbt run
 
-##  Azure Cloud Deployment
+# Launch dashboard
+streamlit run dashboard/dashboard_main.py
+```
 
- - Containerize all modules using Docker.
- - Push to Azure Container Registry (ACR).
- - Deploy on Azure App Service.
+---
 
+## ☁️ Azure Cloud Deployment
 
+- Containerize all modules using **Docker**.  
+- Push Docker images to **Azure Container Registry (ACR)**.  
+- Deploy Streamlit dashboard on **Azure App Service**.
 
- ## Set up daily refresh (DuckDB update):
+### 🔁 Set up daily refresh (DuckDB update)
 
-- Use Azure Container Instances or Azure Logic Apps to trigger daily dbt run.
+Use **Azure Container Instances** or **Azure Logic Apps** to trigger daily `dbt run`.
 
+---
 
 ## 💰 Cost Estimation & Budget Management
 
- ### Step 1: Set up Cost Management
-'''bash
- Create a budget using Azure CLI
+### 🪙 Step 1: Set up Azure Cost Management
+
+Follow [Microsoft’s official tutorial](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets?tabs=psbudget)  
+to create and manage your budget.
+
+```bash
+# Create a budget using Azure CLI
 az consumption budget create \
   --amount 30 \
   --time-grain Monthly \
@@ -100,48 +124,44 @@ az consumption budget create \
         \"enabled\": true,
         \"operator\": \"GreaterThan\",
         \"threshold\": 80,
-        \"contactEmails\": [\".......\"]
+        \"contactEmails\": [\"info@swedbd.nu\"]
       }
-  }" '''
+  }"
+```
 
-- This sets a monthly cost limit of 30 USD and notifies the team when spending exceeds 80% of the budget.
+💡 This sets a **monthly cost limit of $30** and sends an **email alert when spending exceeds 80%** of the budget.
 
+---
 
- ## Step 2: Estimated Costs (per month)
+### 🧾 Step 2: Estimated Monthly Costs
 
- | Azure Service        | Description              | Usage     | Est. Cost (USD)  |
+| Azure Service        | Description              | Usage     | Est. Cost (USD) |
 | -------------------- | ------------------------ | --------- | ---------------- |
-| App Service (B1)     | Host Streamlit dashboard | Always On | $15              |
-| Container Registry   | Store Docker images      | 1 GB      | $2               |
-| Storage Account      | Store logs/data backups  | 10 GB     | $3               |
-| Container Instances  | Daily DLT/DBT run        | 1 h/day   | $5               |
-| Network & Monitoring | Insights, metrics        | -         | $3               |
-| **Total**            |                          |           | **~$28 / month** |
+| App Service (B1)     | Host Streamlit dashboard | Always On | $15 |
+| Container Registry   | Store Docker images      | 1 GB | $2 |
+| Storage Account      | Store logs/data backups  | 10 GB | $3 |
+| Container Instances  | Daily DLT/DBT run        | 1 h/day | $5 |
+| Network & Monitoring | Insights, metrics        | - | $3 |
+| **Total** |  |  | **~$28 / month** |
 
+---
 
-
-
-## Step 3: Snowflake Comparison  with DuckDB
+### ❄️ Step 3: Snowflake vs DuckDB Comparison
 
 | Feature     | DuckDB                   | Snowflake                         |
-| ----------- | ------------------------ | --------------------------------- |
+| ------------ | ------------------------ | --------------------------------- |
 | Cost        | Free (local compute)     | Pay-per-use (warehouse + storage) |
 | Scalability | Local only               | Auto-scaling compute              |
 | Maintenance | Manual                   | Fully managed                     |
-| Ideal for   | Small to medium datasets | Enterprise scale pipelines        |
+| Ideal for   | Small to medium datasets | Enterprise-scale pipelines        |
 
-
-   
+---
 
 ## 👥 Team & Contributions
 
-| Member                        | Role          | Contribution                             |
-| ----------------------------- | ------------- | ---------------------------------------- |
-| **Mohammad Nurul Hassan**     | Data Engineer | DLT + DBT + Deployment + Cost Estimation |
-| **Andres Trujillo**           | Data Engineer | Dagster + Streamlit + Azure Integration  |             |
+| Member                    | Role          | Contribution |
+| -------------------------- | ------------- | ------------- |
+| **Mohammad Nurul Hassan** | Data Engineer | DLT + DBT + Deployment + Cost Estimation |
+| **Andres Trujillo**       | Data Engineer | Dagster + Streamlit + Azure Integration  |
 
-
-   
-
-
-
+---
