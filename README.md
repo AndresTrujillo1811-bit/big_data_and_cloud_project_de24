@@ -1,40 +1,36 @@
 # Big_data_and_cloud_project_de24
 
-###  Project Overview
+### 🧭 Project Overview
 
-This project is part of the Big Data & Cloud module in the YH Data Engineering program (STI, Stockholm).
-It demonstrates how to deploy a data warehouse pipeline to Azure, automate data ingestion from JobTech API, and visualize HR analytics insights through an interactive Streamlit dashboard.
+This project is part of the **Big Data & Cloud** module in the **YH Data Engineering program (STI, Stockholm)**.  
+It demonstrates how to **deploy a data warehouse pipeline to Azure**, automate data ingestion from **JobTech API**, and visualize HR analytics insights through an **interactive Streamlit dashboard**.
 
-🧩 Objectives
- - Cloud Deployment:
-Deploy an end-to-end data engineering pipeline (DLT → DBT → Dagster → Streamlit) on Azure using DuckDB as the data warehouse.
+---
 
-- Cost Estimation:
-Estimate and monitor Azure costs using Azure Cost Management + Billing.
+### 🧩 Objectives
 
+- **Cloud Deployment:**  
+  Deploy an end-to-end data engineering pipeline (DLT → DBT → Dagster → Streamlit) on Azure using DuckDB as the data warehouse.
 
+- **Cost Estimation:**  
+  Estimate and monitor Azure costs using **Azure Cost Management + Billing**.
 
+---
 
+### 🧰 Tools & Technologies
 
-### Tools & Technologies
+🐍 Python 3.11+  
+🦆 DuckDB  
+🧱 DLT (Data Loading Tool)  
+🧮 DBT (Data Build Tool)  
+⚙️ Dagster (Orchestration)  
+🌐 Streamlit (Dashboard)  
+☁️ Microsoft Azure (Deployment)  
+🧾 Azure Cost Management + Billing (Monitoring)
 
-🐍 Python 3.11+
+---
 
-🦆 DuckDB
-
-🧱 DLT (Data Loading Tool)
-
-🧮 DBT (Data Build Tool)
-
-⚙️ Dagster (orchestration)
-
-🌐 Streamlit (dashboard)
-
-☁️ Microsoft Azure (deployment)
-
-🧾 Azure Cost Management + Billing (monitoring)
-
-### 🧰 Project Structure
+### 🧱 Project Structure
 
 ```bash
 big_data_and_cloud_project_de24/
@@ -52,7 +48,6 @@ big_data_and_cloud_project_de24/
 
 
 
-
 ###  🚀 Deployment 
 
  -  Local Setup
@@ -65,15 +60,13 @@ pip install -r requirements.txt
 
 
 -  Run Locally
-bash
-Extract and load job ads
-python dlt_code/load_job_ads.py
+ Extract and load job ads
+ python dlt_code/load_job_ads.py
  Transform with dbt
  dbt run
 
 - Launch dashboard
   streamlit run dashboard/dashboard_main.py
-
 
 
 ##  Azure Cloud Deployment
