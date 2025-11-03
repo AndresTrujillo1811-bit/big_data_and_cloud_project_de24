@@ -12,7 +12,7 @@ def get_duckdb_connection():
     return con
 
 
-def get_job_list(query: str = "SELECT * FROM staging.jobads_resource"): # Getting job rows 
+def get_job_list(query: str = "SELECT * FROM staging.job_ads"): # Getting job rows 
     con = get_duckdb_connection()
     df = con.execute(query).fetchdf()
     con.close()
