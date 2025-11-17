@@ -8,7 +8,9 @@ services:
     container_name: dwh_pipeline
     ports:
       - "3000:3000"
-    image: rgdataproject-e6ajgqgmb3d5guhz.azurecr.io/dwh-pipeline:latest  
+    image: crjobtechdev-asgzd9d0dwegegeb.azurecr.io/dwh_pipeline:latest  
+    volumes:
+      - ./duckdb_warehouse:/mnt/data
 
   dashboard:
     build:
@@ -17,5 +19,7 @@ services:
     container_name: dashboard
     ports:
       - "8501:8501"
-    image: rgdataproject-e6ajgqgmb3d5guhz.azurecr.io/dashboard:latest
+    image: crjobtechdev-asgzd9d0dwegegeb.azurecr.io/dashboard:latest
+    volumes:
+      - ./duckdb_warehouse:/mnt/data
   

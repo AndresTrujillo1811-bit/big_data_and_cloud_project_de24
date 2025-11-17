@@ -217,3 +217,6 @@ orchestration/.tmp_dagster_home_*/
 orchestration/.tmp_dagster_home_*/
 test.txt
 azure_text.txt
+
+profiles.yml
+tmp_az_cli.txt

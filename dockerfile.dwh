@@ -8,6 +8,12 @@ COPY orchestration/ /pipeline/orchestration/
 
 RUN pip install dagster dagster-dbt dagster-dlt dagster-webserver dbt-core dbt-duckdb dlt duckdb
 
+
+# 🔹 এখানে env var গুলো সেট করছি
+ENV DUCKDB_PATH=/mnt/data/job_ads.duckdb
+ENV DBT_PROFILES_DIR=/pipeline/dbt_code
+
+
 EXPOSE 3000
 
 CMD ["dagster", "dev", "-f", "definitions.py", "-h", "0.0.0.0", "-p", "3000"]
